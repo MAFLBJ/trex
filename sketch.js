@@ -184,9 +184,9 @@ function geranuvem() {
     nuvem.scale = random(0.25, 0.6);
 
     //profundidade:
-    //trex.depth = nuvem.depth + 10;
-    nuvem.depth = trex.depth;
-    trex.depth = trex.depth + 1;
+    trex.depth = nuvem.depth + 10;
+    //nuvem.depth = trex.depth;
+    //trex.depth = trex.depth + 1;
 
     grupoNuvens.add(nuvem);
      
