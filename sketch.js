@@ -14,8 +14,6 @@ var JOGAR = 1;
 var ENCERRAR = 0;
 var estado = JOGAR;
 
-
-
 function preload() {
   trex_correndo = loadAnimation("trex1.png", "trex3.png", "trex4.png");
   trex_parado = loadAnimation("trex_collided.png");
@@ -37,25 +35,25 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(600, 200);
+  createCanvas(windowWidth, windowHeight);
 
   //criar grupos para as nuvens e obstáculos:
   grupoNuvens = createGroup();
   grupoObstaculos = createGroup();
 
   //texto de Fim de jogo:
-  fimDeJogo = createSprite(300, 100);
+  fimDeJogo = createSprite(width/600*300, height/200*100);
   fimDeJogo.addImage(fimimg);
   fimDeJogo.scale = 0.5;
   fimDeJogo.visible = false;
 
-  restart = createSprite(300, 150);
+  restart = createSprite(width/600*300, height/200*150);
   restart.addImage(restartimg);
   restart.scale = 0.5;
   restart.visible = false;
 
   //criar um sprite do trex
-  trex = createSprite(50, 160, 20, 50);
+  trex = createSprite(width/600*50, height/200*160, width/600*20, height/200*50);
   trex.addAnimation("runing", trex_correndo);
   trex.addAnimation("parado", trex_parado);
   trex.scale = 0.5;
@@ -65,12 +63,12 @@ function setup() {
   trex.setCollider("circle", 0, 0, 40);
 
   //criar uma sprite para o solo
-  solo = createSprite(200, 195, 400, 20);
+  solo = createSprite(width/600*200, height/200*195, width/600*400, height/200*20);
   solo.addImage(soloimg);
   solo.velocityX = soloVx0;
 
   //criar solo invisivel
-  soloinvisivel = createSprite(200, 200, 400, 5);
+  soloinvisivel = createSprite(width/600*200, height/200*200, width/600*400, height/200*5);
 
   //console.log("OI"+" "+"Mundo");
 }
@@ -127,9 +125,10 @@ function draw() {
   
 
   //controle de salto do trex
-  if (keyDown("space") && trex.y >= 160) {
+  if ((touches.length > 0 || keyDown("space")) && trex.y >= 160) {
     trex.velocityY = -10;
     somSalto.play();
+    touches = [];
   }
   //gravidade
   trex.velocityY = trex.velocityY + delGrav;
@@ -139,12 +138,13 @@ function draw() {
   soloinvisivel.visible = false;
 
   //reinicia solo => solo infinito:
-  if (solo.x < 0) {
-    solo.x = solo.width / 2;
+  if (solo.x < solo.width/3) {
+    solo.x = solo.width/2;
   }
+  
 
   drawSprites();
-  text("Pontuação: " + pontuacao + " seg", 450, 20);
+  text("Pontuação: " + pontuacao + " seg", width/600*450, height/200*20);
 }
 
 function reset(){
@@ -167,7 +167,7 @@ function reset(){
 }
 function geranuvem() {
   if (frameCount % 60 === 0) {
-    var nuvem = createSprite(601, 150, 40, 10);
+    var nuvem = createSprite(width/600*601, height/200*150, width/600*40, height/200*10);
     nuvem.velocityX = -3;
 
     //tempo de vida:
@@ -177,7 +177,7 @@ function geranuvem() {
     nuvem.addImage(nuvemimg);
 
     //adiciona posição aleatória:
-    nuvem.y = Math.round(random(1, 125));
+    nuvem.y = Math.round(random(1, height/200*125));
 
     //dimensiona:
     //nuvem.scale = 0.4;
@@ -195,7 +195,7 @@ function geranuvem() {
 
 function geraObstaculos() {
   if (frameCount % 60 === 0) {
-    var obstaculo = createSprite(600, 178, 10, 40);
+    var obstaculo = createSprite(width/600*601, height/200*195, width/600*10, height/200*40);
     obstaculo.velocityX = solo.velocityX;
 
     var tipoObstaculo = Math.round(random(1, 6));
