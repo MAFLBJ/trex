@@ -35,7 +35,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  //createCanvas(windowWidth, windowHeight);
+  createCanvas(600, 200);
+
 
   //criar grupos para as nuvens e obstáculos:
   grupoNuvens = createGroup();
@@ -195,7 +197,8 @@ function geranuvem() {
 
 function geraObstaculos() {
   if (frameCount % 60 === 0) {
-    var obstaculo = createSprite(width/600*601, height/200*195, width/600*10, height/200*40);
+    //var obstaculo = createSprite(width/600*601, height/200*195, width/600*10, height/200*40);
+    var obstaculo = createSprite(601, 180, 10, 40);
     obstaculo.velocityX = solo.velocityX;
 
     var tipoObstaculo = Math.round(random(1, 6));
