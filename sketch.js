@@ -108,15 +108,16 @@ function draw() {
     
     estado = ENCERRAR;
     //trex.velocityY = -10;
-    //somSalto.play();
+    somSalto.play();
     if (tempoSomFim > 0) {
       somFim.play();
       //console.log(tempoSomFim);
     }
   }
-  if(mousePressedOver(restart)){
+  if((touches.length > 0 || mousePressedOver(restart)) && estado === ENCERRAR){
     //console.log("reiniciar o jogo");
     reset();
+    touches = [];
   }
 
   if (pontuacao > 0 && pontuacao % 500 === 0) {
