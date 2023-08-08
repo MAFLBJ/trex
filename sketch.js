@@ -4,7 +4,7 @@ var solo, soloimg;
 var soloinvisivel;
 var nuvemimg;
 var pontuacao = 0;
-var tempoSomFim0 = 60;
+var tempoSomFim0 = 30;
 var Obs_1, Obs_2, Obs_3, Obs_4, Obs_5, Obs_6;
 var somSalto, somFim, somPonto;
 var soloVx0 = -7;
